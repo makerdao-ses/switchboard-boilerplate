@@ -1,7 +1,9 @@
 import * as path from 'path';
 import { connectionPlugin, fieldAuthorizePlugin, makeSchema } from 'nexus/dist';
 import { validationPlugin } from 'nexus-validation-plugin';
-import * as types from './modules/CoreUnit';
+import { applyMiddleware } from 'graphql-middleware';
+import { permissionsAuth } from './permissions';
+import * as types from './modules';
 
 export const schema = makeSchema({
   types,
@@ -25,3 +27,4 @@ export const schema = makeSchema({
     export: 'Context',
   },
 });
+export const schemaWithMiddleware = applyMiddleware(schema, permissionsAuth);

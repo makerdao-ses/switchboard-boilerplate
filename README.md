@@ -43,6 +43,17 @@ to automatically use the correct node version. The version is detected from the 
 
 If you do not have a code editor setup, we recommend that you use [Visual Studio Code](https://code.visualstudio.com/) to get started. It is very beginner friendly and you can move on to something else (such as Sublime, vim, emacs, ...) down the road if you want to.
 
+Some environment variables are pre-configured for the development. You can copy them over to your `.env` file by running:
+
+```sh
+cp developer.env .env
+```
+
+### Environment variables
+
+- `DATABASE_URL` (required): path to the database file.
+- `JWT_SECRET` (required): server's jwt secret.
+
 ### Project-Requirements
 
 To understand bettwe that is planned, you can read and ask questions here:

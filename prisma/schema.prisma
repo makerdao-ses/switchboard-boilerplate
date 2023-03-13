@@ -17,3 +17,9 @@ model CoreUnit {
   descriptionParagraph            String
   descriptionParagraphImageSource String
 }
+
+model User {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+}

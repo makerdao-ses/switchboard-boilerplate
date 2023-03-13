@@ -2,6 +2,11 @@
 ### Do not make changes to this file directly
 
 
+type AuthPayload {
+  token: String
+  user: User
+}
+
 type CoreUnit {
   code: String
   descriptionParagraph: String
@@ -13,7 +18,24 @@ type CoreUnit {
   shortCode: String
 }
 
+type Mutation {
+  signIn(password: String!, username: String!): AuthPayload
+  signUp(user: UserCreateInput!): AuthPayload
+}
+
 type Query {
   coreUnit(id: String): CoreUnit
   coreUnits: [CoreUnit]
+  me: User
+}
+
+type User {
+  id: String
+  password: String
+  username: String
+}
+
+input UserCreateInput {
+  password: String!
+  username: String!
 }

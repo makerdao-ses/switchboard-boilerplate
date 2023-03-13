@@ -29,6 +29,10 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  UserCreateInput: { // input type
+    password: string; // String!
+    username: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -43,6 +47,10 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   CoreUnit: { // root type
     code?: string | null; // String
     descriptionParagraph?: string | null; // String
@@ -53,7 +61,13 @@ export interface NexusGenObjects {
     name?: string | null; // String
     shortCode?: string | null; // String
   }
+  Mutation: {};
   Query: {};
+  User: { // root type
+    id?: string | null; // String
+    password?: string | null; // String
+    username?: string | null; // String
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -67,6 +81,10 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
+  }
   CoreUnit: { // field return type
     code: string | null; // String
     descriptionParagraph: string | null; // String
@@ -77,13 +95,27 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
     shortCode: string | null; // String
   }
+  Mutation: { // field return type
+    signIn: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    signUp: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+  }
   Query: { // field return type
     coreUnit: NexusGenRootTypes['CoreUnit'] | null; // CoreUnit
     coreUnits: Array<NexusGenRootTypes['CoreUnit'] | null> | null; // [CoreUnit]
+    me: NexusGenRootTypes['User'] | null; // User
+  }
+  User: { // field return type
+    id: string | null; // String
+    password: string | null; // String
+    username: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
   CoreUnit: { // field return type name
     code: 'String'
     descriptionParagraph: 'String'
@@ -94,13 +126,32 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
     shortCode: 'String'
   }
+  Mutation: { // field return type name
+    signIn: 'AuthPayload'
+    signUp: 'AuthPayload'
+  }
   Query: { // field return type name
     coreUnit: 'CoreUnit'
     coreUnits: 'CoreUnit'
+    me: 'User'
+  }
+  User: { // field return type name
+    id: 'String'
+    password: 'String'
+    username: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    signIn: { // args
+      password: string; // String!
+      username: string; // String!
+    }
+    signUp: { // args
+      user: NexusGenInputs['UserCreateInput']; // UserCreateInput!
+    }
+  }
   Query: {
     coreUnit: { // args
       id?: string | null; // String
@@ -116,7 +167,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 
